@@ -1,16 +1,30 @@
-# React + Vite
+# 🎤 Airton · Site Oficial & Portfólio de Comédia
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Bem-vindo ao repositório do site oficial do comediante **Airton** (`@airton.comedy`). Esta plataforma foi desenvolvida para reunir conteúdos, agenda/galeria de espetáculos, redes sociais, o podcast *Entradas de Peso* e um canal direto para *booking* e contactos profissionais.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Funcionalidades
 
-## React Compiler
+- **Design Moderno & Responsivo:** Interface *dark mode* adaptada a telemóveis, tablets e computadores.
+- **Galeria Interativa:** Visualização de fotografias e momentos em palco com *lightbox* integrado.
+- **Redes Sociais & Podcast:** Acesso rápido ao Instagram, TikTok e ao podcast *Entradas de Peso* no YouTube.
+- **Formulário de Booking / Contacto Direto:** Envio de mensagens diretamente para o email sem recarregar a página (via AJAX / FormSubmit).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
+## 🛠️ Tecnologias Utilizadas
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- **[React](https://react.dev/)** — Biblioteca JavaScript para construção da interface.
+- **[Vite](https://vitejs.dev/)** — Bundler rápido para desenvolvimento e build de produção.
+- **CSS3 Custom Properties** — Estilização responsiva com variáveis CSS e *Grid/Flexbox*.
+- **[FormSubmit](https://formsubmit.co/)** — Integração *serverless* para receção de emails de contacto.
+
+---
+
+## 🚀 Como correr o projeto localmente
+
+1. **Clonar o repositório:**
+   ```bash
+   git clone [https://github.com/Garoteco-cpu/airton-site.git](https://github.com/Garoteco-cpu/airton-site.git)
+   cd airton-site
