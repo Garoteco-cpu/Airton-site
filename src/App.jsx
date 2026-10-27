@@ -13,6 +13,39 @@ export default function App() {
   const [aberta, setAberta] = useState(null);
   const t = T[lang];
   const [a, b1, c, b2, d] = t.p2;
+  const [status, setStatus] = useState("");
+  const [enviado, setEnviado] = useState(false);
+const [aEnviar, setAEnviar] = useState(false);
+
+async function enviarEmail(e) {
+  e.preventDefault();
+  setAEnviar(true);
+  const dados = Object.fromEntries(new FormData(e.target));
+
+  try {
+    const res = await fetch("https://formsubmit.co/ajax/agencia@azorica.pt", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        ...dados,
+        _subject: "Novo contacto do site - Airton!",
+        _captcha: "false",
+      }),
+    });
+
+    if (res.ok) {
+      setEnviado(true);
+      e.target.reset();
+    } else {
+      setStatus("erro");
+    }
+  } catch {
+    setStatus("erro");
+  }
+}
 
   return (
     <div className="site">
@@ -99,12 +132,35 @@ export default function App() {
         <div>
           <span className="eyebrow">{t.rir}</span>
           <h2>{t.h_cont}</h2>
-          {[["INSTAGRAM", "@airton.comedy", IG], ["TIKTOK", "@air7on", TK], ["PODCAST · YOUTUBE", "Entradas de Peso", YT]].map(([l, v, u]) => (
+          {[["INSTAGRAM", "@airton.comedy", IG], ["TIKTOK", "@air7on", TK], ["PODCAST · YOUTUBE", "Entradas de Peso", YT]/* ...resto do teu array */].map(([l, v, u]) => (
             <a key={l} className="card" href={u} target="_blank" rel="noreferrer">
               <small>{l}</small>
               <b>{v}</b>
             </a>
           ))}
+
+          {/* NOVO FORMULÁRIO AQUI */}
+          <form onSubmit={enviarEmail} className="card form-contacto">
+  <small>ENVIAR EMAIL / BOOKING</small>
+
+  <input type="hidden" name="_subject" value="Novo contacto do site Airton!" />
+  <input type="hidden" name="_captcha" value="false" />
+
+  <div className="form-row">
+    <input type="text" name="nome" placeholder="O teu nome" required />
+    <input type="email" name="email" placeholder="O teu email" required />
+  </div>
+
+  <textarea name="mensagem" rows="4" placeholder="Escreve aqui a tua mensagem..." required />
+
+  <button type="submit" disabled={aEnviar}>
+    {aEnviar ? "A enviar..." : "Enviar Email"}
+  </button>
+
+  {enviado && (
+    <span className="msg-sucesso">✓ Mensagem enviada com sucesso!</span>
+  )}
+</form>
         </div>
         <img src={foto("poster")} alt="Airton" className="retrato" />
       </section>
@@ -121,6 +177,16 @@ export default function App() {
 }
 
 const css = `
+.form-contacto{display:flex;flex-direction:column;gap:10px;margin-top:10px;width:100%}
+.form-contacto small{display:block;margin-bottom:2px;color:#888;letter-spacing:.08em;font-size:.7rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}
+.form-contacto input,.form-contacto textarea{width:100%;background:#121212;border:1px solid #2e2e2e;border-radius:8px;padding:12px 14px;color:var(--cream);font:inherit;font-size:.9rem;outline:none;resize:vertical;transition:border-color .2s}
+.form-contacto input:focus,.form-contacto textarea:focus{border-color:var(--pink)}
+.form-contacto button{width:100%;background:var(--pink);color:var(--bg);border:none;border-radius:8px;padding:12px;font:inherit;font-weight:800;cursor:pointer;transition:opacity .2s}
+.form-contacto button:hover{opacity:.9}
+.form-contacto button:disabled{opacity:.5;cursor:not-allowed}
+.msg-sucesso{color:var(--pink);font-size:.85rem;text-align:center;margin-top:4px}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}}
 :root{--bg:#121212;--card:#1d1d1d;--pink:#F4A6AB;--teal:#2A7FA3;--cream:#F4EBD0;--grey:#9a9a9a}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
